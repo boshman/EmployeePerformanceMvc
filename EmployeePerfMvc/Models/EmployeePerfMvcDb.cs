@@ -10,5 +10,11 @@ namespace EmployeePerfMvc.Models
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<GoalAppraisal> GoalAppraisals { get; set; }
+
+        public EmployeePerfMvcDb() : base("name=DefaultConnection")
+        {
+
+        }
     }
+
 }
