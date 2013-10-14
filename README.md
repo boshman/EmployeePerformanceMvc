@@ -27,7 +27,9 @@ To use EF, first go to the NuGet Package Manager and add it to the project (if i
 
 Next, you'll need to create a class that inherits from DbContext. This class will need to have a DbSet property for each class that will be mapped to a new table in the database.
 
-    public DbSet<Employee> Employees { get; set; }
+```c#
+public DbSet<Employee> Employees { get; set; }
+```
 
 EF uses the inherited class to find the classes that will be mapped to new tables in the database. The properties in the found classes will be the columns in the new tables. There needs to be connectionString in the web.config file with the connection information.
 
@@ -41,18 +43,23 @@ In order to setup migrations in EF (so you can add a Seed method to initially lo
 
 This will generate a Migrations folder and add a Configurations.cs file. Here you'll find a seed method that you can use to add a loop for loading tables like so:
 
-    protected override void Seed(MvcMovie.Models.MovieDBContext context)
+```c#
+protected override void Seed(MvcMovie.Models.MovieDBContext context)
+{
+    //  This method will be called after migrating to the latest version.
+
+    //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+    //  to avoid creating duplicate seed data. E.g.
+    //
+    for (int i = 0; i <= 1000; i++)
     {
-        //  This method will be called after migrating to the latest version.
-    
-        //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-        //  to avoid creating duplicate seed data. E.g.
-        //
-        for (int i = 0; i <= 1000; i++)
-        {
-            context.Movies.AddOrUpdate(m => m.Title,
-                new MvcMovie.Models.Movie{ Title = "Movie_" + i.ToString(), ReleaseDate = Convert.ToDateTime("1/1/1970"), Genre = "Drama", Director = "Steven Spielberg" });
-        }
+        context.Movies.AddOrUpdate(m => m.Title,
+            new MvcMovie.Models.Movie{ Title = "Movie_" + i.ToString(), 
+                                       ReleaseDate = Convert.ToDateTime("1/1/1970"), 
+                                       Genre = "Drama", 
+                                       Director = "Steven Spielberg" });
     }
+}
+```
         
         
