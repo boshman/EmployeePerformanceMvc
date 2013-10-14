@@ -19,16 +19,7 @@ To use EF, first go to the NuGet Package Manager and add it to the project (if i
 
 Next, you'll need to create a class that inherits from DbContext. This class will need to have a DbSet property for each class that will be mapped to a new table in the database.
 
-public class EmployeePerfMvcDb : DbContext
-{
-    public DbSet<Employee> Employees { get; set; }
-    public DbSet<GoalAppraisal> GoalAppraisals { get; set; }
-
-    public EmployeePerfMvcDb() : base("name=DefaultConnection")
-    {
-
-    }
-}
+public DbSet<Employee> Employees { get; set; }
 
 EF uses the inherited class to find the classes that will be mapped to new tables in the database. The properties in the found classes will be the columns in the new tables. There needs to be connectionString in the web.config file with the connection information.
 
