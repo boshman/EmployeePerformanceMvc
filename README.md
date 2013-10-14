@@ -19,9 +19,10 @@ GitHub formats the text in this README.md based on what they call Markdown.
 For markdown rules, see https://help.github.com/articles/github-flavored-markdown
 
 Techniques Learned
-------------------
+==================
 
-ENTITY FRAMEWORK (EF)
+Entity Framework (EF)
+---------------------
 To use EF, first go to the NuGet Package Manager and add it to the project (if it isn't by default).
 
 Next, you'll need to create a class that inherits from DbContext. This class will need to have a DbSet property for each class that will be mapped to a new table in the database.
